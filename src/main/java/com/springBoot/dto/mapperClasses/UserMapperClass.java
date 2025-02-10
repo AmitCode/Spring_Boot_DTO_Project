@@ -3,10 +3,13 @@ package com.springBoot.dto.mapperClasses;
 import com.springBoot.dto.pojo.UserInfo;
 import com.springBoot.dto.userDto.UserDTOClass;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 //Gathering all the User to Dto class conversion methods of a single mapper class.
+@Component
 public class UserMapperClass {
     public UserDTOClass covertUserToUserDto( UserInfo userInfo){
         UserDTOClass userDTOClass = new UserDTOClass();

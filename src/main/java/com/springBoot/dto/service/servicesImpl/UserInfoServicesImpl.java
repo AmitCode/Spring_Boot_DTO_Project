@@ -77,4 +77,12 @@ public class UserInfoServicesImpl implements UserInfoServices {
         return userInfoList.stream().map(userInfo -> modelMapper.map(userInfo,UserDTOClass.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public UserDTOClass markUserInActive(UserInfo userInfo){
+        UserInfo oldUserInfo = userInfoRepository.findByUserIDAndUserName(userInfo.getUserID(),userInfo.getUserName());
+        oldUserInfo.setIsActive("N");
+        UserInfo updatedUser = userInfoRepository.save(oldUserInfo);
+        return modelMapper.map(updatedUser,UserDTOClass.class);
+    }
 }

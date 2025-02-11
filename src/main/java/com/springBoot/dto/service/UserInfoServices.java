@@ -13,4 +13,5 @@ public interface UserInfoServices {
     public List<UserDTOClass> getAllUserInfo();
     public UserDTOClass updateUserInfo(UserInfo userInfo);
     public List<UserDTOClass> deleteUserInfo(Long userId);
+    public UserDTOClass markUserInActive(UserInfo userInfo);
 }

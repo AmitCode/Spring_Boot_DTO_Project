@@ -5,6 +5,7 @@ import com.springBoot.dto.exception.UserInfoNotFoundException;
 import com.springBoot.dto.pojo.UserInfo;
 import com.springBoot.dto.service.UserInfoServices;
 import com.springBoot.dto.userDto.UserDTOClass;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class UserInfoRestController {
     private UserInfoServices userInfoServices;
     @PostMapping("/createNewUser")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createNewUser(@RequestBody UserInfo userInfo){
+    public String createNewUser(@Valid @RequestBody UserInfo userInfo){
         return userInfoServices.insertUserInfo(userInfo);
     }
     @GetMapping("/getSingleUserInfo")
@@ -41,7 +42,7 @@ public class UserInfoRestController {
     }
 
     @PutMapping("/updateUserDetails")
-    public ResponseEntity<UserDTOClass> updateUserDetails(@RequestBody UserInfo userInfo){
+    public ResponseEntity<UserDTOClass> updateUserDetails(@Valid @RequestBody UserInfo userInfo){
         return new ResponseEntity<>(userInfoServices.updateUserInfo(userInfo),HttpStatus.OK);
     }
 

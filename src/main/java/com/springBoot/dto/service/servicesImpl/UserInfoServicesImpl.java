@@ -1,5 +1,6 @@
 package com.springBoot.dto.service.servicesImpl;
 
+import com.springBoot.dto.exception.UserInfoNotFoundException;
 import com.springBoot.dto.mapperClasses.AutoUserMapperClass;
 import com.springBoot.dto.mapperClasses.UserMapperClass;
 import com.springBoot.dto.pojo.UserInfo;
@@ -38,14 +39,16 @@ public class UserInfoServicesImpl implements UserInfoServices {
 
     @Override
     public UserDTOClass getUserInfoById(Long UserInfoId){
-        Optional<UserInfo> UserInfoDetail = userInfoRepository.findById(UserInfoId);
-        UserInfo userInfo = UserInfoDetail.get();
+        UserInfo UserInfoDetail = userInfoRepository.findById(UserInfoId).orElseThrow(
+                () -> new UserInfoNotFoundException("User ","id",UserInfoId)
+        );
+        //UserInfo userInfo = UserInfoDetail.get();
         //Using user defined mapper class
         //return userMapperClass.covertUserToUserDto(UserInfoDetail.get());
         //Using Model Mapper Class
         //return modelMapper.map(userInfo, UserDTOClass.class);
         //Using MapStruct
-        return AutoUserMapperClass.MAPPER.mapToUserDto(userInfo);
+        return AutoUserMapperClass.MAPPER.mapToUserDto(UserInfoDetail);
     }
 
     @Override
